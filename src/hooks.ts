@@ -27,7 +27,12 @@ async function onMainWindowLoad(win: _ZoteroTypes.MainWindow): Promise<void> {
     tag: "menuitem",
     id: "zotero-link-copy-url",
     label: "Copy URL for this item",
-    commandListener: (ev) => Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper).copyString(`zotero://select/library/collections/${Zotero.getActiveZoteroPane().getSelectedCollection()._key}/items/${Zotero.getActiveZoteroPane().getSelectedItems()[0]._key}`),
+    commandListener: (ev) =>
+      Components.classes["@mozilla.org/widget/clipboardhelper;1"]
+        .getService(Components.interfaces.nsIClipboardHelper)
+        .copyString(
+          `zotero://select/library/collections/${Zotero.getActiveZoteroPane().getSelectedCollection()._key}/items/${Zotero.getActiveZoteroPane().getSelectedItems()[0]._key}`,
+        ),
     icon: `chrome://${addon.data.config.addonRef}/content/icons/favicon@0.5x.png`,
   });
 }
