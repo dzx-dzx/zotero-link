@@ -31,7 +31,10 @@ async function onMainWindowLoad(win: _ZoteroTypes.MainWindow): Promise<void> {
       Components.classes["@mozilla.org/widget/clipboardhelper;1"]
         .getService(Components.interfaces.nsIClipboardHelper)
         .copyString(
-          `zotero://select/library/collections/${Zotero.getActiveZoteroPane().getSelectedCollection()._key}/items/${Zotero.getActiveZoteroPane().getSelectedItems()[0]._key}`,
+          Zotero.getActiveZoteroPane().getSelectedCollection() ?
+            `zotero://select/library/collections/${Zotero.getActiveZoteroPane().getSelectedCollection()._key}/items/${Zotero.getActiveZoteroPane().getSelectedItems()[0]._key}`
+            :
+            `zotero://select/items/0_${Zotero.getActiveZoteroPane().getSelectedItems()[0]._key}`
         ),
     icon: `chrome://${addon.data.config.addonRef}/content/icons/favicon@0.5x.png`,
   });
